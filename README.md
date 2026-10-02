@@ -1,4 +1,3 @@
-# awesome-fde-tools
 <p align="center">
   <img src="assets/hero.svg" alt="awesome-fde-tools: a mountain above the wordmark, with fde highlighted in violet." width="800">
 </p>
