@@ -186,7 +186,7 @@ Operate inside the customer's live web apps and give agents a real browser when 
   Combine deterministic Playwright-style actions with natural-language act, observe, and extract so automations survive customer UI changes better than selectors alone. Useful when a legacy admin UI must be driven without its own API.<br>
   <sub>Field note: Model-backed steps are non-deterministic and cost calls. Keep critical writes on deterministic locators and record failing pages as fixtures.</sub>
 
-- <a href="https://github.com/tonysurfly"><img src="https://github.com/tonysurfly.png?size=48" width="20" height="20" alt="" title="tonysurfly on GitHub"></a> **[Webfuse](https://www.webfuse.com)** `live customer session proxy`<br>
+- <a href="https://www.webfuse.com"><img src="https://www.webfuse.com/favicon-96x96.png" width="20" height="20" alt="" title="Webfuse"></a> **[Webfuse](https://www.webfuse.com)** `live customer session proxy`<br>
   Proxy a customer web app into shared Spaces and Sessions so an engineer or agent can co-browse, transfer control, and run guided workflows without a browser extension. Useful when acting inside the customer's SSO-bound SaaS UI with real permissions intact.<br>
   <sub>Field note: Commercial, and maintained by this list's author. Treat the proxy as a trust boundary: configure masking and audit for sensitive fields, and confirm the customer's security review accepts session capture.</sub>
 
@@ -417,7 +417,7 @@ Use the [delivery recipes](docs/delivery-recipes.md) to plan an acceptance test,
 
 Research proceeds in loops: discover candidates with Grok, compare neighboring tools, challenge claims, check primary sources, and cut entries that do not add enough. The [research record](research/README.md) includes decisions and corrections. Listed capabilities come from documentation, not a claim that every tool has been deployed in a customer environment.
 
-Most entries are open source. `source-available` marks restricted projects; verify the deployment edition you need. Avatars identify the maintaining GitHub account, not necessarily the project's logo. Website links use favicons.
+Most entries are open source. `source-available` marks restricted projects; verify the deployment edition you need. Icons identify the maintaining GitHub account or the project's own mark. Website links use favicons.
 
 Contributions should name the customer failure, show the documented mechanism that addresses it, and explain why the nearest listed alternative is insufficient. Read [CONTRIBUTING.md](CONTRIBUTING.md).
 
