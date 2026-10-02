@@ -38,7 +38,7 @@ Start with the failure you need to reproduce or the evidence you need to leave b
 Keep discovery decisions, evidence, and agent behavior available at cutover and to the next engineer.
 
 - <a href="https://github.com/suboss87"><img src="https://github.com/suboss87.png?size=48" width="20" height="20" alt="" title="suboss87 on GitHub"></a> **[FDEOps](https://github.com/suboss87/FDEOps)** `agent engagement skills`<br>
-  Install task skills and a coordinator that give an AI coding agent an engagement workflow — discover, build, hand off — with a local per-customer memory so decisions and evidence survive between sessions.<br>
+  Install task skills and a coordinator that give an AI coding agent an engagement workflow - discover, build, hand off - with a local per-customer memory so decisions and evidence survive between sessions.<br>
   <sub>Field note: Skills are instructions an agent executes. Review them before pointing them at customer material, and check data-handling rules: the local memory store holds customer context.</sub>
 
 <p align="right"><a href="#contents">Back to contents ↑</a></p>
