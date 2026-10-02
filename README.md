@@ -9,8 +9,8 @@
 
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Awesome"></a>
-  <a href="#contents"><img src="https://img.shields.io/badge/tools-61-8b65a5?style=flat-square" alt="61 curated tools"></a>
-  <a href="#contents"><img src="https://img.shields.io/badge/field_problems-8-5b7285?style=flat-square" alt="8 field problems"></a>
+  <a href="#contents"><img src="https://img.shields.io/badge/tools-66-8b65a5?style=flat-square" alt="66 curated tools"></a>
+  <a href="#contents"><img src="https://img.shields.io/badge/field_problems-9-5b7285?style=flat-square" alt="9 field problems"></a>
   <a href="research/README.md"><img src="https://img.shields.io/badge/curated-2026--10--02-687b5b?style=flat-square" alt="Curated October 2, 2026"></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-8b65a5?style=flat-square" alt="Contributions welcome"></a>
 </p>
@@ -21,16 +21,27 @@ This collection focuses on those problems. A tool earns its place through a spec
 
 ## Contents
 
-- [Untangle workflows and records](#untangle-workflows-and-records) <sub>7 tools</sub>
-- [Build the missing integration](#build-the-missing-integration) <sub>7 tools</sub>
+- [Carry context across the engagement](#carry-context-across-the-engagement) <sub>1 tool</sub>
+- [Untangle workflows and records](#untangle-workflows-and-records) <sub>9 tools</sub>
+- [Build the missing integration](#build-the-missing-integration) <sub>8 tools</sub>
 - [Preserve access across systems](#preserve-access-across-systems) <sub>7 tools</sub>
 - [Review data changes before cutover](#review-data-changes-before-cutover) <sub>9 tools</sub>
 - [Reproduce hostile dependencies](#reproduce-hostile-dependencies) <sub>10 tools</sub>
 - [Extract difficult customer inputs](#extract-difficult-customer-inputs) <sub>7 tools</sub>
 - [Survive retries and human approvals](#survive-retries-and-human-approvals) <sub>6 tools</sub>
-- [Prove the customer task works](#prove-the-customer-task-works) <sub>8 tools</sub>
+- [Prove the customer task works](#prove-the-customer-task-works) <sub>9 tools</sub>
 
 Start with the failure you need to reproduce or the evidence you need to leave behind. These are alternatives to evaluate, not a stack to install in full.
+
+## <img src="assets/icons/archive.svg" width="30" height="22" alt="">Carry context across the engagement
+
+Keep discovery decisions, evidence, and agent behavior available at cutover and to the next engineer.
+
+- <a href="https://github.com/suboss87"><img src="https://github.com/suboss87.png?size=48" width="20" height="20" alt="" title="suboss87 on GitHub"></a> **[FDEOps](https://github.com/suboss87/FDEOps)** `agent engagement skills`<br>
+  Install task skills and a coordinator that give an AI coding agent an engagement workflow — discover, build, hand off — with a local per-customer memory so decisions and evidence survive between sessions.<br>
+  <sub>Field note: Skills are instructions an agent executes. Review them before pointing them at customer material, and check data-handling rules: the local memory store holds customer context.</sub>
+
+<p align="right"><a href="#contents">Back to contents ↑</a></p>
 
 ## <img src="assets/icons/clipboard-list.svg" width="30" height="22" alt="">Untangle workflows and records
 
@@ -60,9 +71,17 @@ Find where the work stalls and which records represent the same real-world thing
   Inspect, join, filter, and compare customer extracts in a terminal spreadsheet. Useful on a remote host where a desktop cleanup application cannot run.<br>
   <sub>Field note: An interactive investigation tool, not an unattended validator. Keep the final transformation rules and test inputs outside the session.</sub>
 
+- <a href="https://github.com/marimo-team"><img src="https://github.com/marimo-team.png?size=48" width="20" height="20" alt="" title="marimo-team on GitHub"></a> **[marimo](https://github.com/marimo-team/marimo)** `rerunnable analysis notebooks`<br>
+  Run discovery-week analysis as reactive notebooks stored as plain Python that git-diff cleanly and re-execute deterministically. Useful when the exploration behind a data decision must stay reviewable through handoff.<br>
+  <sub>Field note: Reactivity removes stale-cell surprises but re-executes downstream cells on edit. Pin data snapshots when rerunning against changed customer data would confuse the record.</sub>
+
 - <a href="https://github.com/turbot"><img src="https://github.com/turbot.png?size=48" width="20" height="20" alt="" title="turbot on GitHub"></a> **[Steampipe](https://github.com/turbot/steampipe)** `live API investigation`<br>
   Query customer SaaS and cloud accounts through SQL plugins without first building a warehouse. Useful for checking cross-system inventory and permission assumptions during discovery.<br>
   <sub>Field note: Plugin calls still need approved credentials and API budgets. Results are live or cached, not a durable historical replication pipeline.</sub>
+
+- <a href="https://github.com/simonw"><img src="https://github.com/simonw.png?size=48" width="20" height="20" alt="" title="simonw on GitHub"></a> **[Datasette](https://github.com/simonw/datasette)** `explorable extract handoff`<br>
+  Publish a customer extract or migration dataset as a read-only web UI and JSON API with faceted search. Useful when operations staff need to find and verify records without waiting for an application to be built.<br>
+  <sub>Field note: A publishing layer, not a secured application. Put it behind the customer's access controls; the interface does not make a sensitive extract safe to expose.</sub>
 
 <p align="right"><a href="#contents">Back to contents ↑</a></p>
 
@@ -97,6 +116,10 @@ Handle customer-specific grants, extraction state, and legacy interfaces instead
 - <a href="https://github.com/apache"><img src="https://github.com/apache.png?size=48" width="20" height="20" alt="" title="apache on GitHub"></a> **[Apache NiFi](https://github.com/apache/nifi)** `operator-visible dataflows`<br>
   Build queued flows with backpressure and searchable record provenance. Useful when customer operators need to inspect where an individual record went and why it stopped.<br>
   <sub>Field note: An operated service, not a laptop utility. Configure provenance retention and disk budgets; prefer the customer's existing installation when available.</sub>
+
+- <a href="https://github.com/jlowin"><img src="https://github.com/jlowin.png?size=48" width="20" height="20" alt="" title="jlowin on GitHub"></a> **[FastMCP](https://github.com/jlowin/fastmcp)** `MCP server scaffolding`<br>
+  Build an MCP server over a customer system that has no agent surface, with typed tools, auth middleware, and testing utilities instead of hand-written protocol plumbing. Useful when the integration deliverable is an action interface for agents rather than another extraction pipeline.<br>
+  <sub>Field note: Wrapping a legacy API adds no authorization. Map tools to the customer's permission model and test denied calls, not only the happy path.</sub>
 
 <p align="right"><a href="#contents">Back to contents ↑</a></p>
 
@@ -294,6 +317,10 @@ Test direct tool behavior, then the model's choices, then the resulting business
   Exercise a customer MCP server's tools, resources, and prompts without an agent deciding what to call. Separate transport, authentication, and argument failures from model behavior.<br>
   <sub>Field note: Protocol success is not business authorization. Test denied access and actual side effects, including tools advertised as read-only.</sub>
 
+- <a href="https://github.com/snyk"><img src="https://github.com/snyk.png?size=48" width="20" height="20" alt="" title="snyk on GitHub"></a> **[Snyk agent-scan](https://github.com/snyk/agent-scan)** `agent toolchain audit`<br>
+  Scan MCP servers, agent configurations, and skills for excessive permissions, tool poisoning, and injection exposure before they touch customer credentials. Useful when a community MCP server for the customer's system needs a security answer before connection.<br>
+  <sub>Field note: Covers known patterns, not the server's runtime behavior. Treat a clean scan as one input to the customer's security review, and re-scan on version changes.</sub>
+
 - <a href="https://github.com/promptfoo"><img src="https://github.com/promptfoo.png?size=48" width="20" height="20" alt="" title="promptfoo on GitHub"></a> **[promptfoo](https://github.com/promptfoo/promptfoo)** `customer-case regressions`<br>
   Version customer examples and compare prompts or models with assertions and adversarial cases. Useful for turning acceptance examples into a rerunnable regression suite.<br>
   <sub>Field note: Keep a held-out case set. A text or model-graded answer can pass while the downstream record is wrong; check resulting state separately.</sub>
@@ -331,6 +358,9 @@ Test direct tool behavior, then the model's choices, then the resulting business
 | <img src="https://www.google.com/s2/favicons?domain=ycombinator.com&amp;sz=64" width="16" height="16" alt=""> [The FDE playbook with Bob McGrew](https://www.ycombinator.com/library/Mt-the-fde-playbook-for-ai-startups-with-bob-mcgrew) | Customer discovery, embedded engineering, and deciding what field work should become a product capability. |
 | <img src="https://www.google.com/s2/favicons?domain=palantir.com&amp;sz=64" width="16" height="16" alt=""> [The Ontology system](https://www.palantir.com/docs/foundry/architecture-center/ontology-system/) | An operational model that connects data, decisions, actions, and security. Foundry-specific context, not a required platform. |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&amp;sz=64" width="16" height="16" alt=""> [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) | Tasks, trials, graders, and checking what happened after an agent acted. |
+| <img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" width="16" height="16" alt=""> [awesome-fde-resources](https://github.com/global-fde/awesome-fde-resources) | FDE learning, practice write-ups, and case material. A sibling list with a broader mandate than this catalog. |
+| <img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" width="16" height="16" alt=""> [12-factor-agents](https://github.com/humanlayer/12-factor-agents) | Principles for production-grade agent software; the discipline behind several entries here. |
+| <img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" width="16" height="16" alt=""> [agents-towards-production](https://github.com/NirDiamant/agents-towards-production) | Practical patterns and code for taking agents from demo to production. |
 
 Use the [delivery recipes](docs/delivery-recipes.md) to plan an acceptance test, and the [engagement brief](docs/engagement-brief.md) to agree on the customer outcome, constraints, owner, and product follow-up.
 
