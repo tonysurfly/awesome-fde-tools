@@ -9,8 +9,8 @@
 
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Awesome"></a>
-  <a href="#contents"><img src="https://img.shields.io/badge/tools-66-8b65a5?style=flat-square" alt="66 curated tools"></a>
-  <a href="#contents"><img src="https://img.shields.io/badge/field_problems-9-5b7285?style=flat-square" alt="9 field problems"></a>
+  <a href="#contents"><img src="https://img.shields.io/badge/tools-73-8b65a5?style=flat-square" alt="73 curated tools"></a>
+  <a href="#contents"><img src="https://img.shields.io/badge/field_problems-12-5b7285?style=flat-square" alt="12 field problems"></a>
   <a href="research/README.md"><img src="https://img.shields.io/badge/curated-2026--10--02-687b5b?style=flat-square" alt="Curated October 2, 2026"></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-8b65a5?style=flat-square" alt="Contributions welcome"></a>
 </p>
@@ -24,7 +24,10 @@ This collection focuses on those problems. A tool earns its place through a spec
 - [Carry context across the engagement](#carry-context-across-the-engagement) <sub>1 tool</sub>
 - [Untangle workflows and records](#untangle-workflows-and-records) <sub>9 tools</sub>
 - [Build the missing integration](#build-the-missing-integration) <sub>8 tools</sub>
+- [Govern agent tool access](#govern-agent-tool-access) <sub>2 tools</sub>
 - [Preserve access across systems](#preserve-access-across-systems) <sub>7 tools</sub>
+- [Actuate browsers and live customer sessions](#actuate-browsers-and-live-customer-sessions) <sub>3 tools</sub>
+- [Isolate untrusted agent execution](#isolate-untrusted-agent-execution) <sub>2 tools</sub>
 - [Review data changes before cutover](#review-data-changes-before-cutover) <sub>9 tools</sub>
 - [Reproduce hostile dependencies](#reproduce-hostile-dependencies) <sub>10 tools</sub>
 - [Extract difficult customer inputs](#extract-difficult-customer-inputs) <sub>7 tools</sub>
@@ -123,6 +126,20 @@ Handle customer-specific grants, extraction state, and legacy interfaces instead
 
 <p align="right"><a href="#contents">Back to contents ↑</a></p>
 
+## <img src="assets/icons/key-round.svg" width="30" height="22" alt="">Govern agent tool access
+
+Keep credentials and tool policy out of the model when an agent must act in the customer's systems.
+
+- <a href="https://github.com/ArcadeAI"><img src="https://github.com/ArcadeAI.png?size=48" width="20" height="20" alt="" title="ArcadeAI on GitHub"></a> **[Arcade](https://github.com/ArcadeAI/arcade-mcp)** `authorized MCP tool runtime`<br>
+  Build MCP tools that declare their OAuth requirements so the runtime vaults tokens, runs the user consent flow, and injects credentials server-side; the model never receives the secret. Useful when each customer user must authorize agent actions separately.<br>
+  <sub>Field note: The framework is open source; production vaulting and gateway features are commercial. Different job from FastMCP scaffolding: Arcade is the governed execution and per-user authorization layer.</sub>
+
+- <a href="https://github.com/stacklok"><img src="https://github.com/stacklok.png?size=48" width="20" height="20" alt="" title="stacklok on GitHub"></a> **[ToolHive](https://github.com/stacklok/toolhive)** `isolated MCP runtime and gateway`<br>
+  Run MCP servers in containers behind a registry, gateway, and identity integration so customer security can approve which tools agents may call and audit the invocations. Useful when an engagement must expose customer systems as tools under IT review.<br>
+  <sub>Field note: Adds platform surface. Start with only the servers the engagement needs; container isolation does not validate tool arguments or replace authorization.</sub>
+
+<p align="right"><a href="#contents">Back to contents ↑</a></p>
+
 ## <img src="assets/icons/shield-check.svg" width="30" height="22" alt="">Preserve access across systems
 
 A valid OAuth token and an indexed document do not establish permission to perform the customer's action.
@@ -154,6 +171,38 @@ A valid OAuth token and an indexed document do not establish permission to perfo
 - <a href="https://github.com/open-policy-agent"><img src="https://github.com/open-policy-agent.png?size=48" width="20" height="20" alt="" title="open-policy-agent on GitHub"></a> **[Conftest](https://github.com/open-policy-agent/conftest)** `delivery-config policy checks`<br>
   Test structured deployment and integration configuration with Rego assertions. Keep customer-specific rules for approved destinations, required settings, and forbidden configuration in the handoff checks.<br>
   <sub>Field note: Checks declared artifacts before use. It is not runtime authorization and cannot prove that the installed service follows its configuration.</sub>
+
+<p align="right"><a href="#contents">Back to contents ↑</a></p>
+
+## <img src="assets/icons/app-window.svg" width="30" height="22" alt="">Actuate browsers and live customer sessions
+
+Operate inside the customer's live web apps and give agents a real browser when the workflow has no API.
+
+- <a href="https://github.com/browserbase"><img src="https://github.com/browserbase.png?size=48" width="20" height="20" alt="" title="browserbase on GitHub"></a> **[Browserbase](https://www.browserbase.com)** `hosted agent browsers`<br>
+  Provision isolated cloud Chromium sessions with contexts and proxies so browser agents and demos do not depend on a laptop browser. Useful when a customer UI must be automated at scale or from a server.<br>
+  <sub>Field note: Commercial hosted infrastructure. Confirm data residency, recording retention, and whether customer credentials may enter the session.</sub>
+
+- <a href="https://github.com/browserbase"><img src="https://github.com/browserbase.png?size=48" width="20" height="20" alt="" title="browserbase on GitHub"></a> **[Stagehand](https://github.com/browserbase/stagehand)** `self-healing browser agent SDK`<br>
+  Combine deterministic Playwright-style actions with natural-language act, observe, and extract so automations survive customer UI changes better than selectors alone. Useful when a legacy admin UI must be driven without its own API.<br>
+  <sub>Field note: Model-backed steps are non-deterministic and cost calls. Keep critical writes on deterministic locators and record failing pages as fixtures.</sub>
+
+- <a href="https://github.com/tonysurfly"><img src="https://github.com/tonysurfly.png?size=48" width="20" height="20" alt="" title="tonysurfly on GitHub"></a> **[Webfuse](https://www.webfuse.com)** `live customer session proxy`<br>
+  Proxy a customer web app into shared Spaces and Sessions so an engineer or agent can co-browse, transfer control, and run guided workflows without a browser extension. Useful when acting inside the customer's SSO-bound SaaS UI with real permissions intact.<br>
+  <sub>Field note: Commercial, and maintained by this list's author. Treat the proxy as a trust boundary: configure masking and audit for sensitive fields, and confirm the customer's security review accepts session capture.</sub>
+
+<p align="right"><a href="#contents">Back to contents ↑</a></p>
+
+## <img src="assets/icons/box.svg" width="30" height="22" alt="">Isolate untrusted agent execution
+
+Run model-generated code and computer-use desktops away from the customer's laptop and yours.
+
+- <a href="https://github.com/e2b-dev"><img src="https://github.com/e2b-dev.png?size=48" width="20" height="20" alt="" title="e2b-dev on GitHub"></a> **[E2B](https://e2b.dev)** `Firecracker agent sandboxes`<br>
+  Start hardware-isolated Linux microVMs per agent session, with pause, resume, and an optional desktop, for code execution and computer-use inside a customer-approved boundary. Useful when a delivered agent must run code without touching customer or engineer machines.<br>
+  <sub>Field note: Isolation tier and network egress are the decision. A sandbox with open egress can still exfiltrate; configure secrets injection and egress policy deliberately.</sub>
+
+- <a href="https://github.com/daytonaio"><img src="https://github.com/daytonaio.png?size=48" width="20" height="20" alt="" title="daytonaio on GitHub"></a> **[Daytona](https://github.com/daytonaio/daytona)** `secure AI code workspaces`<br>
+  Provide disposable or persistent workspaces for AI-generated code with self-host paths suited to customer tenancy. Useful when agents need a real development environment rather than a single execution.<br>
+  <sub>Field note: Default isolation can be container-class; choose VM or hardened tiers for fully untrusted code. Confirm the self-host edition before committing to a customer.</sub>
 
 <p align="right"><a href="#contents">Back to contents ↑</a></p>
 
